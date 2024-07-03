@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+
+# just run the script from `lib/create-discourse-plugin`
+
+require_relative '../lib/create-discourse-plugin.rb'
