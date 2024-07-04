@@ -1,3 +1,5 @@
+require 'optparse'
+
 # Helper
 class Helpers
   def self.to_snake_case(string)
@@ -20,7 +22,30 @@ if plugin_name.nil?
   plugin_name = gets.chomp
 end
 
-system "gh repo create #{plugin_name} --template discourse/discourse-plugin-skeleton --private --clone"
+parser = OptionParser.new
+
+visibility = 'private'
+parser.on('-p [p]', '--public', 'Create the plugin in a public repo') do
+  visibility = 'public'
+end
+
+parser.on('--private [private]', 'Create the plugin in a private repo, this is default') do
+  visibility = 'private'
+end
+
+repo_name = plugin_name
+parser.on('-o [o]', '--organization', 'Create the plugin in a private repo under an organization') do |organization|
+  repo_name = "#{organization}/#{plugin_name}"
+end
+
+parser.on('-h [h]', '--help', 'Display this help message') do
+  puts parser
+  exit
+end
+
+parser.parse!
+
+system "gh repo create #{repo_name} --template discourse/discourse-plugin-skeleton --#{visibility} --clone"
 
 puts '🚂 Renaming directories...'
 

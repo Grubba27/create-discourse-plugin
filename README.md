@@ -12,13 +12,6 @@ This will create a new directory with the plugin name and a basic plugin structu
 
 currently creates the plugin in a private repo under your github account.
 
-### Future todos
-
-- [ ] Add option to create the plugin in a public repo
-- [ ] Add option to create the plugin in a private repo under an organization
-- [ ] Add option to create the plugin in a public repo under an organization
-
-
 ## Requirements
 
 This plugins requires a working GH CLI
