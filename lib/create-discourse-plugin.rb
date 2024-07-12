@@ -45,6 +45,16 @@ end
 
 parser.parse!
 
+if repo_name == plugin_name
+  puts 'do you want to add an org? [y/n], default is n'
+  org = gets.chomp
+  if org == 'y'
+    puts 'Enter the organization name:'
+    org_name = gets.chomp
+    repo_name = "#{org_name}/#{plugin_name}"
+  end
+end
+
 system "gh repo create #{repo_name} --template discourse/discourse-plugin-skeleton --#{visibility} --clone"
 
 puts '🚂 Renaming directories...'
